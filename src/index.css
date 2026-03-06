@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,53 +6,50 @@
 
 @layer base {
   :root {
-    --background: 0 0% 2%;
-    --foreground: 40 25% 92%;
+    --background: 150 20% 4%;
+    --foreground: 39 30% 93%;
 
-    --card: 0 0% 6%;
-    --card-foreground: 40 25% 92%;
+    --card: 160 22% 14%;
+    --card-foreground: 39 30% 93%;
 
-    --popover: 0 0% 2%;
-    --popover-foreground: 40 25% 92%;
+    --popover: 150 20% 4%;
+    --popover-foreground: 39 30% 93%;
 
-    --primary: 40 55% 58%;
-    --primary-foreground: 0 0% 2%;
+    --primary: 37 42% 55%;
+    --primary-foreground: 150 20% 4%;
 
-    --secondary: 0 0% 8%;
-    --secondary-foreground: 40 25% 92%;
+    --secondary: 160 22% 14%;
+    --secondary-foreground: 39 30% 93%;
 
-    --muted: 0 0% 10%;
-    --muted-foreground: 30 5% 50%;
+    --muted: 160 15% 10%;
+    --muted-foreground: 35 8% 57%;
 
-    --accent: 40 55% 58%;
-    --accent-foreground: 0 0% 2%;
+    --accent: 160 22% 14%;
+    --accent-foreground: 39 30% 93%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 40 20% 18%;
-    --input: 40 10% 15%;
-    --ring: 40 55% 58%;
+    --border: 37 42% 55% / 0.1;
+    --input: 37 42% 55% / 0.2;
+    --ring: 37 42% 55%;
 
     --radius: 0px;
 
-    /* Crèche V2 tokens */
-    --noir: 0 0% 2%;
-    --noir-light: 0 0% 6%;
-    --noir-medium: 0 0% 10%;
-    --gold: 40 55% 58%;
-    --gold-bright: 42 65% 65%;
-    --gold-dim: 38 40% 45%;
-    --gold-subtle: 40 30% 20%;
-    --cream: 40 25% 92%;
-    --cream-muted: 35 15% 75%;
-    --stone: 30 5% 50%;
-    --ash: 20 3% 35%;
+    /* Crèche custom tokens */
+    --midnight: 150 20% 4%;
+    --forest: 160 22% 14%;
+    --forest-light: 158 22% 17%;
+    --sage: 155 18% 30%;
+    --ivory: 39 30% 93%;
+    --ivory-muted: 37 22% 87%;
+    --champagne: 37 42% 55%;
+    --champagne-dim: 37 34% 49%;
+    --warm-gray: 35 8% 57%;
+    --soft-gray: 22 5% 40%;
 
-    --font-display: 'Playfair Display', serif;
-    --font-body: 'Inter', sans-serif;
-
-    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'DM Sans', sans-serif;
   }
 }
 
@@ -66,7 +63,6 @@
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
   }
 
   /* Grain overlay */
@@ -77,26 +73,15 @@
     width: 100%; height: 100%;
     pointer-events: none;
     z-index: 9999;
-    opacity: 0.03;
+    opacity: 0.035;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
     background-repeat: repeat;
     background-size: 256px 256px;
   }
 
   ::selection {
-    background: hsl(var(--gold) / 0.25);
-    color: hsl(var(--cream));
-  }
-
-  /* Custom scrollbar */
-  ::-webkit-scrollbar {
-    width: 4px;
-  }
-  ::-webkit-scrollbar-track {
-    background: hsl(var(--noir));
-  }
-  ::-webkit-scrollbar-thumb {
-    background: hsl(var(--gold) / 0.3);
+    background: hsl(var(--champagne) / 0.3);
+    color: hsl(var(--ivory));
   }
 }
 
@@ -107,97 +92,65 @@
   .font-body {
     font-family: var(--font-body);
   }
-
-  /* Massive hero display */
-  .text-hero {
-    font-family: var(--font-display);
-    font-size: clamp(4rem, 12vw, 12rem);
-    font-weight: 400;
-    line-height: 0.9;
-    letter-spacing: -0.03em;
-  }
-
   .text-display-xl {
     font-family: var(--font-display);
-    font-size: clamp(3rem, 8vw, 7rem);
-    font-weight: 400;
+    font-size: clamp(3.5rem, 10vw, 9rem);
+    font-weight: 300;
     line-height: 0.95;
     letter-spacing: -0.02em;
   }
-
   .text-display-lg {
     font-family: var(--font-display);
-    font-size: clamp(2.2rem, 5vw, 4.5rem);
-    font-weight: 400;
+    font-size: clamp(2.5rem, 6vw, 5.5rem);
+    font-weight: 300;
     line-height: 1.05;
     letter-spacing: -0.015em;
   }
-
   .text-display-md {
     font-family: var(--font-display);
-    font-size: clamp(1.6rem, 3.5vw, 3rem);
-    font-weight: 400;
+    font-size: clamp(1.8rem, 4vw, 3.5rem);
+    font-weight: 300;
     line-height: 1.15;
     letter-spacing: -0.01em;
   }
-
   .text-display-sm {
     font-family: var(--font-display);
-    font-size: clamp(1.2rem, 2vw, 1.8rem);
-    font-weight: 400;
-    line-height: 1.2;
+    font-size: clamp(1.3rem, 2.5vw, 2rem);
+    font-weight: 300;
+    line-height: 1.15;
   }
-
   .text-body-lg {
     font-family: var(--font-body);
-    font-size: clamp(1rem, 1.3vw, 1.15rem);
-    font-weight: 300;
-    line-height: 1.9;
-  }
-
-  .text-body-md {
-    font-family: var(--font-body);
-    font-size: clamp(0.9rem, 1.1vw, 1rem);
-    font-weight: 300;
+    font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+    font-weight: 400;
     line-height: 1.8;
   }
-
+  .text-body-md {
+    font-family: var(--font-body);
+    font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+    font-weight: 400;
+    line-height: 1.7;
+  }
   .text-body-sm {
     font-family: var(--font-body);
-    font-size: clamp(0.78rem, 0.9vw, 0.88rem);
+    font-size: clamp(0.8rem, 1vw, 0.9rem);
     font-weight: 400;
     line-height: 1.6;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.03em;
   }
-
-  .text-label {
+  .text-uppercase-label {
     font-family: var(--font-body);
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     font-weight: 500;
-    letter-spacing: 0.25em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: hsl(var(--gold));
+    color: hsl(var(--champagne));
   }
-
-  .text-nav {
+  .text-nav-link {
     font-family: var(--font-body);
-    font-size: 0.72rem;
+    font-size: 0.78rem;
     font-weight: 500;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-  }
-
-  /* Gold line accent */
-  .gold-line {
-    display: block;
-    width: 48px;
-    height: 1px;
-    background: linear-gradient(90deg, hsl(var(--gold)), transparent);
-  }
-
-  .gold-line-wide {
-    display: block;
-    height: 1px;
-    background: linear-gradient(90deg, hsl(var(--gold) / 0.3), transparent 80%);
   }
 }
