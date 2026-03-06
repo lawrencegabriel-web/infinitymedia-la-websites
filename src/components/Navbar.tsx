@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { motion } from "framer-motion";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -27,64 +26,49 @@ const Navbar = () => {
       ];
 
   return (
-    <motion.nav
-      className="fixed top-0 left-0 right-0 z-[100] transition-all duration-[400ms] ease-out"
+    <nav
+      className="fixed top-0 left-0 right-0 z-[100] transition-all duration-500"
       style={{
-        backgroundColor: scrolled ? "rgba(10, 15, 13, 0.92)" : "transparent",
-        backdropFilter: scrolled ? "blur(20px)" : "none",
-        WebkitBackdropFilter: scrolled ? "blur(20px)" : "none",
-        padding: scrolled ? "16px 0" : "32px 0",
+        backgroundColor: scrolled ? "hsla(0, 0%, 2%, 0.95)" : "transparent",
+        backdropFilter: scrolled ? "blur(24px)" : "none",
+        WebkitBackdropFilter: scrolled ? "blur(24px)" : "none",
       }}
     >
-      <div className="mx-auto flex max-w-[1400px] items-center justify-between px-8">
+      <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 md:px-12"
+        style={{ padding: scrolled ? "18px 48px" : "32px 48px" }}
+      >
         <Link
           to="/"
-          className="font-display text-[1.6rem] tracking-[0.05em] text-ivory transition-colors hover:text-champagne"
+          className="font-display text-xl tracking-[0.06em] text-cream transition-colors duration-300 hover:text-gold"
         >
           Crèche
         </Link>
-        <div className="flex items-center gap-4 md:gap-8">
-          {links.map((link) => (
-            <NavItem key={link.label} {...link} />
-          ))}
+        <div className="flex items-center gap-6 md:gap-10">
+          {links.map((link) => {
+            const className = `text-nav relative transition-colors duration-300 ${
+              link.active ? "text-gold" : "text-cream-muted hover:text-gold"
+            }`;
+
+            const inner = (
+              <>
+                {link.label}
+                <span className="absolute -bottom-1 left-0 h-px w-0 bg-gold transition-all duration-500 ease-out group-hover:w-full" />
+              </>
+            );
+
+            return link.href.startsWith("/") ? (
+              <Link key={link.label} to={link.href} className={`group ${className}`}>
+                {inner}
+              </Link>
+            ) : (
+              <a key={link.label} href={link.href} className={`group ${className}`}>
+                {inner}
+              </a>
+            );
+          })}
         </div>
       </div>
-    </motion.nav>
-  );
-};
-
-const NavItem = ({
-  label,
-  href,
-  active,
-}: {
-  label: string;
-  href: string;
-  active?: boolean;
-}) => {
-  const isExternal = href.startsWith("/");
-  const className = `text-nav-link relative group transition-colors ${
-    active ? "text-champagne" : "text-ivory-muted hover:text-champagne"
-  }`;
-
-  const underline = (
-    <span className="absolute -bottom-1 left-0 h-px w-0 bg-champagne transition-all duration-[400ms] ease-out group-hover:w-full" />
-  );
-
-  if (isExternal) {
-    return (
-      <Link to={href} className={className}>
-        {label}
-        {underline}
-      </Link>
-    );
-  }
-
-  return (
-    <a href={href} className={className}>
-      {label}
-      {underline}
-    </a>
+    </nav>
   );
 };
 

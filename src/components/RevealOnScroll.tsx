@@ -1,36 +1,32 @@
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
 
-interface RevealOnScrollProps {
+interface RevealProps {
   children: ReactNode;
   delay?: number;
   y?: number;
-  duration?: number;
   className?: string;
 }
 
-const RevealOnScroll = ({
+const Reveal = ({
   children,
   delay = 0,
-  y = 30,
-  duration = 1.2,
+  y = 40,
   className = "",
-}: RevealOnScrollProps) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
-      transition={{
-        duration,
-        delay,
-        ease: [0.16, 1, 0.3, 1],
-      }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-};
+}: RevealProps) => (
+  <motion.div
+    initial={{ opacity: 0, y }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.2 }}
+    transition={{
+      duration: 1,
+      delay,
+      ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+    }}
+    className={className}
+  >
+    {children}
+  </motion.div>
+);
 
-export default RevealOnScroll;
+export default Reveal;

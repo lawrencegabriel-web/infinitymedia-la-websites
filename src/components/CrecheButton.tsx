@@ -22,25 +22,27 @@ const CrecheButton = ({
   onClick,
   showArrow = true,
 }: CrecheButtonProps) => {
-  const baseClasses = `
-    relative inline-flex items-center justify-center gap-[10px] overflow-hidden
-    px-[2.8rem] py-[1.1rem] font-body text-[0.75rem] font-medium uppercase
-    tracking-[0.2em] transition-all duration-300 border
+  const base = `
+    group relative inline-flex items-center justify-center gap-3 overflow-hidden
+    px-10 py-4 font-body text-[0.7rem] font-medium uppercase
+    tracking-[0.25em] transition-all duration-500 border
     ${fullWidth ? "w-full" : ""}
-    ${disabled ? "opacity-60 pointer-events-none" : ""}
+    ${disabled ? "opacity-50 pointer-events-none" : ""}
   `;
 
-  const variantClasses =
-    variant === "filled"
-      ? "bg-champagne border-champagne text-midnight hover:bg-champagne-dim"
-      : "bg-transparent border-champagne text-champagne hover:bg-champagne hover:text-midnight";
+  const variants = {
+    outlined:
+      "border-gold/40 text-gold bg-transparent hover:border-gold hover:bg-gold hover:text-noir",
+    filled:
+      "border-gold bg-gold text-noir hover:bg-gold-bright",
+  };
 
   const content = (
     <>
-      <span className="relative z-10">{children}</span>
+      <span className="relative z-10 transition-transform duration-500">{children}</span>
       {showArrow && (
         <svg
-          className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+          className="relative z-10 h-3.5 w-3.5 transition-transform duration-500 group-hover:translate-x-1.5"
           viewBox="0 0 16 16"
           fill="none"
           stroke="currentColor"
@@ -54,7 +56,7 @@ const CrecheButton = ({
 
   if (to) {
     return (
-      <Link to={to} className={`group ${baseClasses} ${variantClasses}`}>
+      <Link to={to} className={`${base} ${variants[variant]}`}>
         {content}
       </Link>
     );
@@ -65,9 +67,8 @@ const CrecheButton = ({
       type={type}
       disabled={disabled}
       onClick={onClick}
-      className={`group ${baseClasses} ${variantClasses}`}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
+      className={`${base} ${variants[variant]}`}
+      whileTap={{ scale: 0.97 }}
     >
       {content}
     </motion.button>

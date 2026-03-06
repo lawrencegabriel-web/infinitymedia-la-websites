@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import RevealOnScroll from "../RevealOnScroll";
+import Reveal from "../RevealOnScroll";
 
 const amenities = [
   {
@@ -30,63 +30,72 @@ const amenities = [
 
 const AmenitiesSection = () => {
   return (
-    <section id="amenities" className="relative overflow-hidden bg-forest py-24 md:py-40">
-      {/* Radial gradient overlay */}
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(ellipse at 80% 20%, hsl(var(--champagne) / 0.06) 0%, transparent 50%)",
-        }}
-      />
+    <section id="amenities" className="relative overflow-hidden py-32 md:py-48">
+      {/* Dark section background with subtle gradient */}
+      <div className="absolute inset-0 bg-noir-light">
+        <div
+          className="absolute inset-0 opacity-60"
+          style={{
+            background: "radial-gradient(ellipse at 70% 20%, hsl(var(--gold) / 0.04) 0%, transparent 50%)",
+          }}
+        />
+      </div>
 
-      <div className="relative mx-auto max-w-[1400px] px-4 md:px-8">
+      <div className="relative mx-auto max-w-[1400px] px-6 md:px-12">
         {/* Header */}
-        <div className="mb-16 text-center md:mb-24">
-          <RevealOnScroll>
-            <span className="text-uppercase-label">The Club</span>
-          </RevealOnScroll>
-          <RevealOnScroll delay={0.1}>
-            <h2 className="mt-4 text-display-md text-ivory">
-              Designed around
-              <br />
-              <em className="italic">how families actually live</em>
-            </h2>
-          </RevealOnScroll>
-          <RevealOnScroll delay={0.2}>
-            <p className="mx-auto mt-8 max-w-[550px] text-body-md text-ivory-muted">
-              Every corner considered. Every detail in service of the same
-              question: what would make this weekend better?
-            </p>
-          </RevealOnScroll>
+        <div className="mb-20 flex items-start gap-6 md:mb-28">
+          <Reveal>
+            <span className="font-display text-[4rem] font-light leading-none text-gold/10 md:text-[6rem]">02</span>
+          </Reveal>
+          <div className="pt-4">
+            <Reveal delay={0.05}>
+              <span className="text-label">The Club</span>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <h2 className="mt-4 text-display-lg text-cream">
+                Designed around<br />
+                <em className="italic text-gold">how families actually live</em>
+              </h2>
+            </Reveal>
+            <Reveal delay={0.15}>
+              <p className="mt-6 max-w-[450px] text-body-md text-stone">
+                Every corner considered. Every detail in service of the same question: what would make this weekend better?
+              </p>
+            </Reveal>
+          </div>
         </div>
 
-        {/* Cards grid */}
-        <div className="grid gap-px bg-champagne/10 md:grid-cols-2">
+        {/* Cards - alternating layout */}
+        <div className="space-y-0">
           {amenities.map((amenity, i) => (
             <motion.div
               key={amenity.number}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{
-                duration: 0.8,
-                delay: i * 0.15,
-                ease: [0.16, 1, 0.3, 1],
+                duration: 0.9,
+                delay: i * 0.1,
+                ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
               }}
-              className="bg-forest p-8 transition-colors hover:bg-forest-light md:p-12 lg:p-16"
+              className="group border-t border-gold/10 py-10 md:py-14"
             >
-              <span className="font-display text-[1.2rem] text-champagne/40">
-                {amenity.number}
-              </span>
-              <h3 className="mt-3 font-display text-display-sm text-ivory">
-                {amenity.title}
-              </h3>
-              <p className="mt-4 text-body-md text-ivory-muted">
-                {amenity.description}
-              </p>
+              <div className={`flex flex-col gap-6 md:flex-row md:items-start md:gap-16 ${i % 2 === 1 ? "md:flex-row-reverse md:text-right" : ""}`}>
+                <span className="font-display text-[2.5rem] font-light text-gold/15 transition-colors duration-500 group-hover:text-gold/30 md:text-[3.5rem]">
+                  {amenity.number}
+                </span>
+                <div className="flex-1">
+                  <h3 className="font-display text-display-sm text-cream transition-colors duration-500 group-hover:text-gold">
+                    {amenity.title}
+                  </h3>
+                  <p className="mt-3 max-w-[500px] text-body-md text-stone">
+                    {amenity.description}
+                  </p>
+                </div>
+              </div>
             </motion.div>
           ))}
+          <div className="border-t border-gold/10" />
         </div>
       </div>
     </section>
