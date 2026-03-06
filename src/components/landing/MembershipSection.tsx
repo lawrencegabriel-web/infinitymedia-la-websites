@@ -1,4 +1,5 @@
-import RevealOnScroll from "../RevealOnScroll";
+import { motion } from "framer-motion";
+import Reveal from "../RevealOnScroll";
 import CrecheButton from "../CrecheButton";
 
 const values = [
@@ -9,48 +10,73 @@ const values = [
 
 const MembershipSection = () => {
   return (
-    <section className="px-4 py-24 md:px-8 md:py-40">
-      <div className="mx-auto max-w-[700px] text-center">
-        <RevealOnScroll>
-          <span className="text-uppercase-label">Founding Membership</span>
-        </RevealOnScroll>
+    <section className="relative px-6 py-32 md:px-12 md:py-48">
+      <div className="mx-auto max-w-[1400px]">
+        {/* Section number */}
+        <Reveal>
+          <div className="mb-16 flex items-center gap-6">
+            <span className="font-display text-[4rem] font-light leading-none text-gold/10 md:text-[6rem]">03</span>
+            <div>
+              <span className="text-label">Founding Membership</span>
+              <span className="gold-line mt-2" />
+            </div>
+          </div>
+        </Reveal>
 
-        <RevealOnScroll delay={0.1}>
-          <h2 className="mt-6 font-display text-display-md text-ivory">
-            150 families.
-            <br />
-            <em className="italic">One community.</em>
-          </h2>
-        </RevealOnScroll>
+        <div className="grid gap-16 md:grid-cols-[1fr_1fr] md:gap-24">
+          {/* Left - Headline and values */}
+          <div>
+            <Reveal delay={0.1}>
+              <h2 className="text-display-lg text-cream">
+                150 families.
+                <br />
+                <em className="italic text-gold">One community.</em>
+              </h2>
+            </Reveal>
 
-        <RevealOnScroll delay={0.2}>
-          <div className="mt-12 flex justify-center gap-12 md:gap-16">
-            {values.map((item) => (
-              <div key={item.label} className="text-center">
-                <div className="font-display text-[clamp(2rem,4vw,3rem)] font-light leading-[1.1] text-champagne">
-                  {item.value}
-                </div>
-                <div className="mt-2 text-[0.75rem] uppercase tracking-[0.15em] text-warm-gray">
-                  {item.label}
-                </div>
+            <Reveal delay={0.2}>
+              <div className="mt-16 grid grid-cols-3 gap-6">
+                {values.map((item, i) => (
+                  <motion.div
+                    key={item.label}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      duration: 0.8,
+                      delay: 0.3 + i * 0.1,
+                      ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+                    }}
+                  >
+                    <div className="font-display text-[clamp(1.8rem,3.5vw,2.8rem)] font-light leading-[1.1] text-gold">
+                      {item.value}
+                    </div>
+                    <div className="mt-2 text-[0.65rem] uppercase tracking-[0.2em] text-stone">
+                      {item.label}
+                    </div>
+                  </motion.div>
+                ))}
               </div>
-            ))}
+            </Reveal>
           </div>
-        </RevealOnScroll>
 
-        <RevealOnScroll delay={0.3}>
-          <p className="mx-auto mt-12 max-w-[550px] text-body-md text-ivory-muted">
-            Founding members receive priority access to all club amenities,
-            automatic preschool acceptance for their children, and the rare
-            privilege of shaping a community from its very beginning.
-          </p>
-        </RevealOnScroll>
+          {/* Right - Body text and CTA */}
+          <div className="flex flex-col justify-center">
+            <Reveal delay={0.2}>
+              <p className="text-body-lg text-cream-muted">
+                Founding members receive priority access to all club amenities,
+                automatic preschool acceptance for their children, and the rare
+                privilege of shaping a community from its very beginning.
+              </p>
+            </Reveal>
 
-        <RevealOnScroll delay={0.4}>
-          <div className="mt-16">
-            <CrecheButton to="/waitlist">Request an Invitation</CrecheButton>
+            <Reveal delay={0.3}>
+              <div className="mt-12">
+                <CrecheButton to="/waitlist">Request an Invitation</CrecheButton>
+              </div>
+            </Reveal>
           </div>
-        </RevealOnScroll>
+        </div>
       </div>
     </section>
   );
