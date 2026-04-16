@@ -10,6 +10,7 @@ import WaitlistPage from "./pages/WaitlistPage";
 import NotFound from "./pages/NotFound";
 import OodlesVariations from "./pages/OodlesVariations";
 import OodlesVariationsV2 from "./pages/OodlesVariationsV2";
+import OodlesBrief from "./pages/OodlesBrief";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/waitlist" element={<WaitlistPage />} />
           <Route path="/oodles" element={<OodlesVariations />} />
           <Route path="/oodles-v2" element={<OodlesVariationsV2 />} />
+          <Route path="/oodles-brief" element={<OodlesBrief />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
