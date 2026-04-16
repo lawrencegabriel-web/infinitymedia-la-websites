@@ -8,6 +8,8 @@ import IndexV1 from "./pages/IndexV1";
 import VariationPicker from "./pages/VariationPicker";
 import WaitlistPage from "./pages/WaitlistPage";
 import NotFound from "./pages/NotFound";
+import OodlesVariations from "./pages/OodlesVariations";
+import OodlesVariationsV2 from "./pages/OodlesVariationsV2";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +24,8 @@ const App = () => (
           <Route path="/v1" element={<IndexV1 />} />
           <Route path="/pick" element={<VariationPicker />} />
           <Route path="/waitlist" element={<WaitlistPage />} />
+          <Route path="/oodles" element={<OodlesVariations />} />
+          <Route path="/oodles-v2" element={<OodlesVariationsV2 />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
